@@ -5,6 +5,7 @@ plugins {
 
 application {
     mainClassName = "de.istkorrekt.gameoflife.presentation.terminal.TerminalApplication"
+    applicationName = "gameoflife-terminal"
 }
 
 dependencies {
