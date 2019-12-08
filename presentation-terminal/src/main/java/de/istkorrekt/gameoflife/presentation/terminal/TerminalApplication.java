@@ -149,9 +149,11 @@ public class TerminalApplication {
     }
 
     private void handleResetSelector() {
-        Location oldSelectorLocation = currentSelectorLocation;
-        currentSelectorLocation = null;
-        drawCellAt(oldSelectorLocation);
+        if (currentSelectorLocation != null) {
+            Location oldSelectorLocation = currentSelectorLocation;
+            currentSelectorLocation = null;
+            drawCellAt(oldSelectorLocation);
+        }
     }
 
     private void drawSelectorLocation() {
