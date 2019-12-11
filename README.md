@@ -2,6 +2,9 @@
 
 This is another implementation of https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life.
 
+Prerequisites:
+* JDK 11 installed
+
 Build and run with terminal UI:
 ```
 $ ./gradlew :presentation-terminal:run
