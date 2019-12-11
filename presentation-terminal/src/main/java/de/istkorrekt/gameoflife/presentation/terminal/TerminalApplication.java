@@ -130,14 +130,14 @@ public class TerminalApplication {
 
         int matchFieldWidth = width / CELL_COLS;
         int matchFieldHeight = height - CANVAS_TOP_ROWS - CANVAS_BOTTOM_ROWS;
-        return new MatchfieldFactory().createAllDead(Size.of(matchFieldWidth, matchFieldHeight));
+        return MatchfieldFactory.INSTANCE.createAllDead(new Size(matchFieldWidth, matchFieldHeight));
     }
 
     private void handleSelectorLocationChange(Function<Location, Location> locationTransformer) {
         Location oldSelectorLocation = currentSelectorLocation;
 
         if (currentSelectorLocation == null) {
-            currentSelectorLocation = Location.of(0, 0);
+            currentSelectorLocation = new Location(0, 0);
         } else {
             currentSelectorLocation = locationTransformer.apply(currentSelectorLocation);
             drawCellAt(oldSelectorLocation);
