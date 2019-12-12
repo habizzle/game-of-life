@@ -198,7 +198,7 @@ public class TerminalApplication {
     }
 
     private void drawMatchField() {
-        currentMatchField.streamAllLocations()
+        currentMatchField.collectAllLocations()
                 .forEach(this::drawCellAt);
     }
 

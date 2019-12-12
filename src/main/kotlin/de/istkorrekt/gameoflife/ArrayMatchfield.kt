@@ -14,7 +14,7 @@ class ArrayMatchfield(private val size: Size) : Matchfield {
         return cells[location.y][location.x]
     }
 
-    override fun streamAllLocations(): Collection<Location> {
+    override fun collectAllLocations(): Collection<Location> {
         return IntRange(0, size.width - 1)
                 .flatMap { streamLocationsWithX(it) }
     }
@@ -25,17 +25,16 @@ class ArrayMatchfield(private val size: Size) : Matchfield {
     }
 
     override fun nextGeneration(): Matchfield {
-        return ArrayMatchfield(size).also { next ->
-            streamAllLocations().forEach { location ->
-                val cell = getCellAt(location)
-                val amountOfLivingNeighbors = collectNeighborLocations(location)
-                        .map { getCellAt(it) }
-                        .count { it == Cell.ALIVE }
-                val nextGenerationCell = cell.nextGeneration(amountOfLivingNeighbors)
-                next.setCellAt(location, nextGenerationCell)
-            }
-            return next
+        val next = ArrayMatchfield(size);
+        collectAllLocations().forEach { location ->
+            val cell = getCellAt(location)
+            val amountOfLivingNeighbors = collectNeighborLocations(location)
+                    .map { getCellAt(it) }
+                    .count { it == Cell.ALIVE }
+            val nextGenerationCell = cell.nextGeneration(amountOfLivingNeighbors)
+            next.setCellAt(location, nextGenerationCell)
         }
+        return next
     }
 
     fun collectNeighborLocations(location: Location): Collection<Location> {
