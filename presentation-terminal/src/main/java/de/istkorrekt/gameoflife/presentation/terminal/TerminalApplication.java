@@ -21,6 +21,15 @@ import java.util.stream.Stream;
 
 public class TerminalApplication {
 
+    private static final TextColor SELECTOR_COLOR = TextColor.ANSI.WHITE;
+    private static final TextColor ALIVE_COLOR = TextColor.ANSI.RED;
+    private static final TextColor DEAD_COLOR;
+
+    static {
+        byte scale = (byte) (0.3 * 255);
+        DEAD_COLOR = TextColor.Indexed.fromRGB(scale, scale, scale);
+    }
+
     private static final int DEFAULT_WIDTH = 100;
     private static final int DEFAULT_HEIGHT = 32;
 
@@ -220,10 +229,9 @@ public class TerminalApplication {
 
     private TextColor colorForCell(Location location, Cell cell) {
         if (location.equals(currentSelectorLocation)) {
-            return TextColor.ANSI.WHITE;
+            return SELECTOR_COLOR;
         }
-        byte scale = (byte) (0.2 * 255);
-        return cell.isAlive() ? TextColor.ANSI.RED : TextColor.Indexed.fromRGB(scale, scale, scale);
+        return cell.isAlive() ? ALIVE_COLOR : DEAD_COLOR;
     }
 
     private EnumSet<SGR> collectStyleModifiersForCell(Cell cell) {
