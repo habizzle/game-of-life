@@ -19,6 +19,8 @@ dependencies {
 
     runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
 
+    testImplementation("io.rest-assured:rest-assured:4.3.0")
+    testImplementation("io.rest-assured:kotlin-extensions:4.3.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
 }

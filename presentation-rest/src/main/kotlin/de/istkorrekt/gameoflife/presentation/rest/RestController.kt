@@ -11,47 +11,60 @@ import de.istkorrekt.gameoflife.Size
 import spark.Request
 import spark.Response
 
-fun nextRound(request: Request, response: Response) {
-    val json = JsonParser.parseString(request.body()).asJsonObject
-    val matchfield = matchfieldFromJson(json["matchfield"].asJsonObject)
+fun nextRound(request: Request, response: Response): String {
+    val matchfield = try {
+        matchfieldFromRequest(request)
+    } catch (e: IllegalStateException) {
+        response.status(400)
+        return "Request body cannot be parsed"
+    }
     matchfield.nextGeneration()
-    response.body(matchfieldToJson(matchfield).asString)
+    response.apply {
+        status(200)
+        type("application/json")
+    }
+    return matchfieldToJson(matchfield).toString()
 }
 
-fun matchfieldFromJson(json: JsonObject): Matchfield {
+private fun matchfieldFromRequest(request: Request): Matchfield {
+    val json = JsonParser.parseString(request.body()).asJsonObject
+    return matchfieldFromJson(json["matchfield"].asJsonObject)
+}
+
+private fun matchfieldFromJson(json: JsonObject): Matchfield {
     return createWithAlive(
             sizeFromJson(json["size"].asJsonObject),
             aliveLocationsFromJson(json["alive"].asJsonArray)
     )
 }
 
-fun sizeFromJson(json: JsonObject): Size {
+private fun sizeFromJson(json: JsonObject): Size {
     return Size(width = json["width"].asInt, height = json["height"].asInt)
 }
 
-fun aliveLocationsFromJson(json: JsonArray): List<Location> {
+private fun aliveLocationsFromJson(json: JsonArray): List<Location> {
     return json.map { item -> locationFromJson(item.asJsonObject) }
 }
 
-fun locationFromJson(json: JsonObject): Location {
+private fun locationFromJson(json: JsonObject): Location {
     return Location(x = json["x"].asInt, y = json["y"].asInt)
 }
 
-fun matchfieldToJson(matchfield: Matchfield): JsonElement {
+private fun matchfieldToJson(matchfield: Matchfield): JsonElement {
     val json = JsonObject()
     json.add("size", sizeToJson(matchfield.getSize()))
     json.add("alive", aliveLocationsToJson(matchfield))
     return json
 }
 
-fun sizeToJson(size: Size): JsonElement {
+private fun sizeToJson(size: Size): JsonElement {
     val json = JsonObject()
     json.addProperty("width", size.width)
     json.addProperty("height", size.height)
     return json
 }
 
-fun aliveLocationsToJson(matchfield: Matchfield): JsonElement {
+private fun aliveLocationsToJson(matchfield: Matchfield): JsonElement {
     val jsonArray = JsonArray()
     matchfield.collectAllLocations()
             .filter { matchfield.getCellAt(it).isAlive() }
@@ -59,7 +72,7 @@ fun aliveLocationsToJson(matchfield: Matchfield): JsonElement {
     return jsonArray
 }
 
-fun locationToJson(location: Location): JsonElement {
+private fun locationToJson(location: Location): JsonElement {
     val json = JsonObject()
     json.addProperty("x", location.x)
     json.addProperty("y", location.y)
