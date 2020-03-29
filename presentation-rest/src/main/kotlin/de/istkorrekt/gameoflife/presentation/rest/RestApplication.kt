@@ -1,7 +1,7 @@
 package de.istkorrekt.gameoflife.presentation.rest
 
-import spark.Spark.get
+import spark.Spark.put
 
 fun main() {
-    get("/nextRound", "application/json", ::nextRound)
+    put("/nextRound", "application/json", ::nextRound)
 }
