@@ -18,12 +18,12 @@ fun nextRound(request: Request, response: Response): String {
         response.status(400)
         return "Request body cannot be parsed"
     }
-    matchfield.nextGeneration()
+    val nextGeneration = matchfield.nextGeneration()
     response.apply {
         status(200)
         type("application/json")
     }
-    return matchfieldToJson(matchfield).toString()
+    return matchfieldToJson(nextGeneration).toString()
 }
 
 private fun matchfieldFromRequest(request: Request): Matchfield {
