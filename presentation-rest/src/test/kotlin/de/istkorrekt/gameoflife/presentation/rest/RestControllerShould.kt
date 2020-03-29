@@ -20,7 +20,7 @@ internal class RestControllerShould {
 
     @Test
     internal fun `return 200 with matchfield of next round`() {
-        val resonse = Given {
+        Given {
             body("""
                 {
                     "matchfield": {
@@ -32,7 +32,7 @@ internal class RestControllerShould {
                 }
                 """.trimIndent())
         } When {
-            get("/nextRound")
+            put("/nextRound")
         } Then {
             statusCode(200)
             contentType(JSON)
@@ -44,7 +44,7 @@ internal class RestControllerShould {
         Given {
             accept("text/plain")
         } When {
-            get("/nextRound")
+            put("/nextRound")
         } Then {
             statusCode(404)
         }
@@ -55,7 +55,7 @@ internal class RestControllerShould {
         Given {
             body("")
         } When {
-            get("/nextRound")
+            put("/nextRound")
         } Then {
             statusCode(400)
         }
