@@ -1,11 +1,14 @@
-# Yet another implementation of Conway's Game of Life
+Yet another implementation of Conway's Game of Life
+===
 
 This is another implementation of https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life.
 
 Prerequisites:
 * JDK 11 installed
 
-Build and run with terminal UI:
+Build and run with terminal UI
+---
+
 ```
 $ ./gradlew :presentation-terminal:run
 ```
@@ -22,3 +25,12 @@ or
 $ ./gradlew :presentation-terminal:installDist
 $ ./presentation-terminal/build/install/gameoflife-terminal/bin/gameoflife-terminal
 ```
+
+Build and run with REST server
+---
+
+```
+$ ./gradlew :presentation-rest:run
+```
+
+...and then use the REST client from https://github.com/habizzle/game-of-life-html5.
