@@ -5,7 +5,7 @@ FROM openjdk:11
 COPY . /usr/src/gameoflife
 
 RUN cd /usr/src/gameoflife/ \
-  && ./gradlew :presentation-rest:installDist
+  && ./gradlew :presentation-rest:installDist --no-daemon
 
 EXPOSE 4567
 
