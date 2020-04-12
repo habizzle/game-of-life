@@ -49,3 +49,13 @@ docker run -p 1234:4567 istkorrekt/gameoflife-rest
 ```
 
 Congrats, the rest server runs now at http://localhost:1234.
+
+But...why?
+---
+
+Just for fun and learning!
+
+Credits
+---
+
+Thanks go out to the [BetterProgramming](https://medium.com/better-programming) blog, which has a very comprehensive post on [setting up Google Cloud Run with GitHub Actions](https://medium.com/better-programming/publish-your-cloud-run-app-with-github-actions-6c18ff5c5ee4).
