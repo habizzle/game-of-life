@@ -1,8 +1,7 @@
-name: Deploy the application to Google Cloud Run
+name: Deploy REST service to Google Cloud Run
 on:
-  push:
-    branches:
-      - 'master'
+  release:
+    types: [published]
 
 jobs:
   deploy:
@@ -27,5 +26,5 @@ jobs:
       - name: Push image to Google Cloud Container Registry
         run: docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
 
-      - name: Install beta commands and deploy on cloud run
+      - name: Deploy on cloud run
         run: gcloud run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT }} --region europe-west1 --platform managed
