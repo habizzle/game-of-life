@@ -11,18 +11,18 @@ application {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("com.sparkjava:spark-core:2.9.1")
-    implementation("com.google.code.gson:gson:2.8.6")
-    implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation(kotlin("stdlib"))
+    implementation("com.sparkjava:spark-core:2.9.4")
+    implementation("com.google.code.gson:gson:2.10")
+    implementation("org.slf4j:slf4j-api:2.0.5")
     implementation(rootProject)
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
+    runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
 
-    testImplementation("io.rest-assured:rest-assured:4.3.0")
-    testImplementation("io.rest-assured:kotlin-extensions:4.3.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    testImplementation("io.rest-assured:rest-assured:5.3.0")
+    testImplementation("io.rest-assured:kotlin-extensions:5.3.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
 tasks.test {
@@ -34,9 +34,9 @@ tasks.test {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "17"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "17"
 }

@@ -7,11 +7,10 @@ import de.istkorrekt.gameoflife.Size
 import de.istkorrekt.gameoflife.util.parse
 import java.util.logging.Logger
 import kotlin.time.ExperimentalTime
-import kotlin.time.MonoClock
+import kotlin.time.measureTime
 
-val logger = Logger.getGlobal()
+val logger: Logger = Logger.getGlobal()
 
-@ExperimentalTime
 fun main(args: Array<String>) {
     val locations: Collection<Location> = parse(args[0])
     val size = args[1].toInt()
@@ -25,14 +24,14 @@ fun main(args: Array<String>) {
     }
 }
 
-@ExperimentalTime
+@OptIn(ExperimentalTime::class)
 fun autoPlay(initialMatchfield: Matchfield, rounds: Int) {
-    val start = MonoClock.markNow()
-
-    MatchfieldIterator(initialMatchfield, rounds).forEach {
-        logger.info(it.toString())
+    val duration = measureTime {
+        MatchfieldIterator(initialMatchfield, rounds).forEach {
+            logger.info(it.toString())
+        }
     }
-    logger.info("Game finished within ${start.elapsedNow()} after $rounds rounds.")
+    logger.info("Game finished within $duration.d after $rounds rounds.")
 }
 
 private class MatchfieldIterator(var current: Matchfield, val rounds: Int) : Iterator<Matchfield> {

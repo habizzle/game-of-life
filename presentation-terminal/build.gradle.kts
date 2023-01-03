@@ -9,10 +9,10 @@ application {
 
 dependencies {
     implementation(rootProject)
-    implementation("com.googlecode.lanterna:lanterna:3.0.1")
+    implementation("com.googlecode.lanterna:lanterna:3.1.1")
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
