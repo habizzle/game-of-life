@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-    mainClassName = "de.istkorrekt.gameoflife.presentation.rest.RestApplicationKt"
+    mainClass.set("de.istkorrekt.gameoflife.presentation.rest.RestApplicationKt")
     applicationName = "gameoflife-rest"
 }
 
