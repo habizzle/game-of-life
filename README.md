@@ -50,6 +50,19 @@ docker run -p 1234:4567 istkorrekt/gameoflife-rest
 
 Congrats, the rest server runs now at http://localhost:1234.
 
+Build and run via CLI
+---
+
+You can run the compiled project directly with `java`. This probably makes only sense with the help of an IDE. The game can only be used in "auto play" mode via CLI.
+
+```shell script
+java ... de.istkorrekt.gameoflife.app.cli.CliApplicationKt (0|0),(1|0),(2|0) 5 3
+```
+
+This will start the game with "alive" cells at the given cartesian coordinates (`(0|0),(1|0),(2|0)`) on a 5x5 field. The game will go for 3 rounds.
+
+The CLI mode is, of course, not much fun :) - but could be used for benchmarking (with big field, lots of rounds and a good setup, which evolves nicely). The elapsed time is printed after the game has finished.
+
 But...why?
 ---
 
