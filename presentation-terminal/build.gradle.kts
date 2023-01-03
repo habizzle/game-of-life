@@ -3,7 +3,7 @@ plugins {
 }
 
 application {
-    mainClassName = "de.istkorrekt.gameoflife.presentation.terminal.TerminalApplication"
+    mainClass.set("de.istkorrekt.gameoflife.presentation.terminal.TerminalApplication")
     applicationName = "gameoflife-terminal"
 }
 
@@ -12,7 +12,7 @@ dependencies {
     implementation("com.googlecode.lanterna:lanterna:3.1.1")
 }
 
-configure<JavaPluginConvention> {
+configure<JavaPluginExtension> {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
