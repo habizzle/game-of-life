@@ -1,8 +1,7 @@
 name: Deploy REST service to Google Cloud Run
 on:
   release:
-    types: [published]
-
+    types: [ published ]
 jobs:
   deploy:
     name: Deploy job
@@ -13,7 +12,7 @@ jobs:
 
       - name: Build Docker image
         run: docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
-      
+
       - name: Authenticate into Google Cloud Platform
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
